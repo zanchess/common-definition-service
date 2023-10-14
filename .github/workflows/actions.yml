@@ -1,4 +1,4 @@
-name: Run Tests on PR
+name: Run Tests on PR and Deploy to Vercel
 
 on:
   pull_request:
@@ -23,3 +23,17 @@ jobs:
 
       - name: Run Unit Tests
         run: npm test # Adjust to your test command
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to Vercel
+        run: |
+          npx vercel --prod
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_AUTH_TOKEN }}
