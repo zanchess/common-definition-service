@@ -40,7 +40,4 @@ jobs:
         run: npm install -g vercel
 
       - name: Login to Vercel
-        run: vercel login --token ${{ secrets.VERCEL_AUTH_TOKEN }}
-
-      - name: Deploy to Vercel
-        run: vercel --prod --confirm
+        run: vercel --prod --confirm --token ${{ secrets.VERCEL_AUTH_TOKEN }}
