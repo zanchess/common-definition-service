@@ -1,5 +1,5 @@
 export class AutharizationModel {
-	id: string
-	user: string;
-	passwordHash: string;
+    id: string;
+    user: string;
+    passwordHash: string;
 }
