@@ -1,0 +1,50 @@
+name: Run Tests on PR
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18 # Adjust to your Node.js version
+
+      - name: Install project dependencies
+        run: npm ci
+
+      - name: Run Unit Tests
+        run: npm test # Adjust to your test command
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Install project dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Login to Vercel
+        run: vercel --prod --yes --token ${{ secrets.VERCEL_AUTH_TOKEN }}
