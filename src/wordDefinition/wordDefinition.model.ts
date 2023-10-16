@@ -1,6 +1,6 @@
 export class WordDefinitionModel {
     word: string;
-    results: WordDefinitionList[];
+    results: IWordDefinition[];
     syllables: {
         count: number;
         list: string[];
@@ -11,7 +11,7 @@ export class WordDefinitionModel {
     frequency: number;
 }
 
-export class WordDefinitionList {
+interface IWordDefinition {
     definition: string;
     partOfSpeech: string;
     synonyms: string[];

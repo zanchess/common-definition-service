@@ -1,13 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AutharizationModule } from './autharization/autharization.module';
-import { WordDefinitionModule } from './word-definition/word-definition.module';
-import { StatisticModule } from './statistic/statistic.module';
-import { MyWordsModule } from './my-words/my-words.module';
+import { UserModule } from './user/user.module';
+import { WordDefinitionModule } from './wordDefinition/wordDefinition.module';
+import { UserWordsModule } from './userWords/userWords.module';
 
 @Module({
-    imports: [AutharizationModule, WordDefinitionModule, StatisticModule, MyWordsModule],
+    imports: [UserModule, WordDefinitionModule, UserWordsModule],
     controllers: [AppController],
     providers: [AppService]
 })
