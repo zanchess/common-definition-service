@@ -1,5 +1,5 @@
-import { UserWordDto } from './dto/userWord.dto';
+import { UserWordDTO } from './dto/userWord.dto';
 
 export class UserWordsModel {
-    words: UserWordDto[];
+    words: UserWordDTO[];
 }

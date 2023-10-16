@@ -1,4 +1,4 @@
-export class UserWordDto {
+export class UserWordDTO {
     _id: string;
     word: string;
     translation: string;

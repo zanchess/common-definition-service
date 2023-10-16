@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { UserWordDto } from './dto/userWord.dto';
+import { UserWordDTO } from './dto/userWord.dto';
 
 @Controller('userWords')
 export class UserWordsController {
@@ -9,7 +9,7 @@ export class UserWordsController {
     }
 
     @Post('saveWord')
-    async saveWordInUserCollection(@Body() userWordDTO: UserWordDto): Promise<string> {
+    async saveWordInUserCollection(@Body() UserWordDTO: UserWordDTO): Promise<string> {
         return 'Word for user saved';
     }
 
@@ -19,7 +19,7 @@ export class UserWordsController {
     }
 
     @Put(':id')
-    async updateWordInUserCollection(@Param('id') id: string, @Body() updatedUser: UserWordDto): Promise<string> {
+    async updateWordInUserCollection(@Param('id') id: string, @Body() updatedUser: UserWordDTO): Promise<string> {
         return 'Word updated';
     }
 }
