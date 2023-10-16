@@ -15,11 +15,11 @@ export class UserWordsController {
 
     @Delete(':id')
     async deleteWordFromUserCollection(@Param('id') id: string): Promise<string> {
-        return 'User deleted';
+        return 'Word deleted';
     }
 
     @Put(':id')
     async updateWordInUserCollection(@Param('id') id: string, @Body() updatedUser: UserWordDto): Promise<string> {
-        return 'User updated';
+        return 'Word updated';
     }
 }
