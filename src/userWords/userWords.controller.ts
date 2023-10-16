@@ -19,7 +19,7 @@ export class UserWordsController {
     }
 
     @Put(':id')
-    async updateWordInUserCollection(@Param('id') id: string, @Body() updatedUser: UserWordDTO): Promise<string> {
+    async updateWordInUserCollection(@Param('id') id: string, @Body() updatedWord: UserWordDTO): Promise<string> {
         return 'Word updated';
     }
 }
