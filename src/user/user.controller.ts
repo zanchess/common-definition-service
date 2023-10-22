@@ -6,7 +6,7 @@ import { UserService } from './user.service';
 export class UserController {
     constructor(private readonly userService: UserService) {}
     @Post('createUser')
-    async createUser(@Body() createUserDto: CreateUserDTO): Promise<any> {
+    async createUser(@Body() createUserDto: CreateUserDTO): Promise<any> { // TODO: returned type should be fixed
         return this.userService.createUser({ ...createUserDto });
     }
 
