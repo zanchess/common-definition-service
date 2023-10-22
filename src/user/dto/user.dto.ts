@@ -6,7 +6,9 @@ export class LoginDTO {
 export class CreateUserDTO {
     firstName: string;
     lastName: string;
-    email: string;
+    account: string;
     password: string;
+    email: string;
+    age: number;
     male: string;
 }
