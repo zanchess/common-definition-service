@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserWordController } from '../userWord.controller';
-import { getModelToken } from '@nestjs/mongoose';
 import { UserWordService } from '../userWord.service';
+import { getModelToken } from '@nestjs/mongoose';
+import { UserWordController } from '../userWord.controller';
 
-describe('UserWordsController', () => {
-    let controller: UserWordController;
+describe('UserWordsService', () => {
+    let service: UserWordService;
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
@@ -18,10 +18,10 @@ describe('UserWordsController', () => {
             ]
         }).compile();
 
-        controller = module.get<UserWordController>(UserWordController);
+        service = module.get<UserWordService>(UserWordService);
     });
 
     it('should be defined', () => {
-        expect(controller).toBeDefined();
+        expect(service).toBeDefined();
     });
 });
