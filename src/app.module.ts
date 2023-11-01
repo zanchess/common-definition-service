@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { WordDefinitionModule } from './wordDefinition/wordDefinition.module';
-import { UserWordsModule } from './userWords/userWords.module';
+import { UserWordModule } from './userWord/userWord.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 
@@ -11,7 +11,7 @@ import { ConfigModule } from '@nestjs/config';
     imports: [
         UserModule,
         WordDefinitionModule,
-        UserWordsModule,
+        UserWordModule,
         ConfigModule.forRoot(),
         MongooseModule.forRoot(process.env.MONGO_URI)
     ],

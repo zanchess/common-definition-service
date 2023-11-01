@@ -1,5 +1,7 @@
+import { Schema } from 'mongoose';
+
 export class UserWordDTO {
-    _id: string;
+    user: Schema.Types.ObjectId;
     word: string;
     translation: string;
     transcription: string;

@@ -1,16 +1,18 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { UserWordDTO } from './dto/userWord.dto';
+import { UserWordService } from './userWord.service';
 
 @Controller('userWords')
-export class UserWordsController {
+export class UserWordController {
+    constructor(private readonly userWordService: UserWordService) {}
     @Get(':id')
     async getAllWordsForUser(@Param('id') userId: string): Promise<any> {
         return [];
     }
 
     @Post('saveWord')
-    async saveWordInUserCollection(@Body() UserWordDTO: UserWordDTO): Promise<string> {
-        return 'Word for user saved';
+    async saveWordForUser(@Body() userWord: UserWordDTO): Promise<any> {
+        return this.userWordService.saveWordForUser({ ...userWord });
     }
 
     @Delete(':id')

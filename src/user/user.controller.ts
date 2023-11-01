@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Param, Post, Put, Get } from '@nestjs/common';
 import { CreateUserDTO, LoginDTO } from './dto/user.dto';
 import { UserService } from './user.service';
 
@@ -6,8 +6,15 @@ import { UserService } from './user.service';
 export class UserController {
     constructor(private readonly userService: UserService) {}
     @Post('createUser')
-    async createUser(@Body() createUserDto: CreateUserDTO): Promise<any> { // TODO: returned type should be fixed
+    async createUser(@Body() createUserDto: CreateUserDTO): Promise<any> {
+        // TODO: returned type should be fixed
         return this.userService.createUser({ ...createUserDto });
+    }
+
+    @Get(':id')
+    async getUserById(@Param('id') userId: string): Promise<any> {
+        // TODO: returned type should be fixed
+        return this.userService.getUserById(userId);
     }
 
     @Post('login')
