@@ -3,7 +3,7 @@ import { HydratedDocument } from 'mongoose';
 
 export type WordsDefinitionDocument = HydratedDocument<WordDefinition>;
 
-@Schema()
+@Schema({ _id: false })
 export class Result {
     @Prop()
     definition: string;
@@ -42,7 +42,7 @@ export class Result {
     hasInstances: string[];
 }
 
-@Schema()
+@Schema({ _id: false })
 export class Syllables {
     @Prop()
     count: number;
@@ -51,13 +51,7 @@ export class Syllables {
     list: string[];
 }
 
-@Schema()
-export class Pronunciation {
-    @Prop()
-    all: string;
-}
-
-@Schema()
+@Schema({ versionKey: false })
 export class WordDefinition {
     @Prop()
     word: string;
@@ -68,8 +62,8 @@ export class WordDefinition {
     @Prop({ type: Syllables })
     syllables: Syllables;
 
-    @Prop({ type: Pronunciation })
-    pronunciation: Pronunciation;
+    @Prop()
+    pronunciation: string;
 
     @Prop()
     frequency: number;

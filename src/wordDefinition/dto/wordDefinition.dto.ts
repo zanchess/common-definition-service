@@ -1,17 +1,14 @@
-export class IWordDefinition {
-    word: string;
-    results: IWordDefinitionResults[];
-    syllables: {
-        count: number;
-        list: string[];
-    };
-    pronunciation: {
-        all: string;
-    };
-    frequency: number;
+export interface IWordDefinitionsToSave {
+    words: string[];
 }
 
-interface IWordDefinitionResults {
+export interface IPronunciationAll {
+    all: string;
+}
+
+export type IWordPronunciation = IPronunciationAll | string;
+
+export interface IWordDefinitionResults {
     definition: string;
     partOfSpeech: string;
     synonyms: string[];
@@ -19,4 +16,19 @@ interface IWordDefinitionResults {
     hasTypes: string[];
     derivation: string[];
     examples: string[];
+}
+
+export interface IWordDefinition {
+    word: string;
+    results: IWordDefinitionResults[];
+    syllables: {
+        count: number;
+        list: string[];
+    };
+    pronunciation: IWordPronunciation;
+    frequency: number;
+}
+
+export interface IWordDefinitionToSave extends Omit<IWordDefinition, 'pronunciation'> {
+    pronunciation: string;
 }

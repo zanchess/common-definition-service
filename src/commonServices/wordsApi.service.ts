@@ -6,7 +6,6 @@ import { IWordDefinition } from '../wordDefinition/dto/wordDefinition.dto';
 export class WordApiService {
     // TODO: create returned value
     async getWord(word): Promise<IWordDefinition> {
-        console.log(word);
         const options = {
             method: 'GET',
             url: `https://wordsapiv1.p.rapidapi.com/words/${word}`,
