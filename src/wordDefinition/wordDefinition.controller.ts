@@ -8,12 +8,12 @@ export class WordDefinitionController {
     constructor(private readonly wordDefinitionService: WordDefinitionService, private wordsApiService: WordApiService) {}
 
     @Post('word/:word')
-    // TODO: returned type should be fixed
     async saveWordDefinition(@Param() { word }: { word: string }): Promise<IWordDefinitionToSave> {
         const wordToSave = await this.wordsApiService.getWord(word);
         return await this.wordDefinitionService.saveWordDefinition(wordToSave);
     }
 
+    // TODO: put type instead of any
     @Post('saveWords')
     async saveWordDefinitions(@Body() wordsToSave: IWordDefinitionsToSave): Promise<any> {
         return await this.wordDefinitionService.saveWordDefinitions(wordsToSave);

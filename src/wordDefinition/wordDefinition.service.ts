@@ -18,6 +18,7 @@ export class WordDefinitionService {
         return wordsDefinitionToSave.save();
     }
 
+    // TODO: put returned type instead of any type
     async saveWordDefinitions(wordDefinition: IWordDefinitionsToSave): Promise<any> {
         const { words } = wordDefinition;
         const results = [];
