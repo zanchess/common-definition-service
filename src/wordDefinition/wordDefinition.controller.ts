@@ -1,7 +1,7 @@
 import { Controller, Param, Post, Get, Body } from '@nestjs/common';
 import { WordDefinitionService } from './wordDefinition.service';
 import { WordApiService } from '../commonServices/wordsApi.service';
-import { IWordDefinition, IWordDefinitionsToSave, IWordDefinitionToSave } from './dto/wordDefinition.dto';
+import { IWordDefinition, IWordDefinitionsToSave, IWordDefinitionToSave, WordDefinitionsResponse } from './dto/wordDefinition.dto';
 
 @Controller('wordDefinition')
 export class WordDefinitionController {
@@ -13,9 +13,8 @@ export class WordDefinitionController {
         return await this.wordDefinitionService.saveWordDefinition(wordToSave);
     }
 
-    // TODO: put type instead of any
     @Post('saveWords')
-    async saveWordDefinitions(@Body() wordsToSave: IWordDefinitionsToSave): Promise<any> {
+    async saveWordDefinitions(@Body() wordsToSave: IWordDefinitionsToSave): Promise<WordDefinitionsResponse> {
         return await this.wordDefinitionService.saveWordDefinitions(wordsToSave);
     }
 

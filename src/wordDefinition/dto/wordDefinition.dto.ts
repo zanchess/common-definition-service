@@ -32,3 +32,14 @@ export interface IWordDefinition {
 export interface IWordDefinitionToSave extends Omit<IWordDefinition, 'pronunciation'> {
     pronunciation: string;
 }
+
+export interface WordDefinitionsResponse {
+    savedWordsAmount: number;
+    existingWordsAmount: number;
+    notSavedWordsAmount: number;
+    existingWords: string[];
+    notSavedWords: {
+        word: string;
+        reason: string;
+    }[];
+}

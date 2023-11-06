@@ -6,12 +6,12 @@ import { UserWordService } from './userWord.service';
 export class UserWordController {
     constructor(private readonly userWordService: UserWordService) {}
     @Get(':id')
-    async getAllWordsForUser(@Param('id') userId: string): Promise<any> {
+    async getAllWordsForUser(@Param('id') userId: string): Promise<UserWordDTO[]> {
         return [];
     }
 
     @Post('saveWord')
-    async saveWordForUser(@Body() userWord: UserWordDTO): Promise<any> {
+    async saveWordForUser(@Body() userWord: UserWordDTO): Promise<UserWordDTO> {
         return this.userWordService.saveWordForUser({ ...userWord });
     }
 
@@ -21,7 +21,7 @@ export class UserWordController {
     }
 
     @Put(':id')
-    async updateWordInUserCollection(@Param('id') id: string, @Body() updatedUser: UserWordDTO): Promise<string> {
-        return 'Word updated';
+    async updateWordInUserCollection(@Param('id') id: string, @Body() updatedUser: UserWordDTO): Promise<UserWordDTO> {
+        return 'Word updated' as any;
     }
 }

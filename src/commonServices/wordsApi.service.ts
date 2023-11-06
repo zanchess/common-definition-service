@@ -4,7 +4,6 @@ import { IWordDefinition } from '../wordDefinition/dto/wordDefinition.dto';
 
 @Injectable()
 export class WordApiService {
-    // TODO: create returned value
     async getWord(word): Promise<IWordDefinition> {
         const options = {
             method: 'GET',
