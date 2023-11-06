@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { WordsDefinitionDocument, WordDefinition } from './wordDefinition.model';
 import { Model } from 'mongoose';
-import { IWordDefinition, IWordDefinitionsToSave, IWordDefinitionToSave } from './dto/wordDefinition.dto';
+import { IWordDefinition, IWordDefinitionsToSave, IWordDefinitionToSave, WordDefinitionsResponse } from './dto/wordDefinition.dto';
 import { WordApiService } from '../commonServices/wordsApi.service';
 import { mapWordDefinitionToSave } from './utils/mapWordDefinitionToSave';
 
@@ -18,65 +18,34 @@ export class WordDefinitionService {
         return wordsDefinitionToSave.save();
     }
 
-    // TODO: put returned type instead of any type
-    async saveWordDefinitions(wordDefinition: IWordDefinitionsToSave): Promise<any> {
+    async saveWordDefinitions(wordDefinition: IWordDefinitionsToSave): Promise<WordDefinitionsResponse> {
         const { words } = wordDefinition;
-        const results = [];
+        const wordsDefinitionResponse = {
+            savedWordsAmount: 0,
+            existingWordsAmount: 0,
+            notSavedWordsAmount: 0,
+            existingWords: [],
+            notSavedWords: []
+        };
 
-        // TODO: Refactor it without reduce method
         await Promise.allSettled(
             words.map(async (word) => {
                 try {
                     const existingRecord = await this.wordDefinitionModel.findOne({ word });
                     if (existingRecord) {
-                        results.push({
-                            ok: true,
-                            isNewDefinition: false,
-                            word
-                        });
+                        wordsDefinitionResponse.savedWordsAmount++;
+                        wordsDefinitionResponse.existingWords.push(word);
                         return;
                     }
 
                     const wordDefinitionToSave = await this.wordApiService.getWord(word);
                     await this.saveWordDefinition(wordDefinitionToSave);
-                    results.push({
-                        ok: true,
-                        isNewDefinition: true,
-                        word
-                    });
+                    wordsDefinitionResponse.savedWordsAmount++;
                 } catch (error) {
-                    results.push({
-                        ok: false,
-                        word,
-                        error: `${error}` // TODO: create custom errors
-                    });
+                    wordsDefinitionResponse.notSavedWordsAmount++;
+                    wordsDefinitionResponse.notSavedWords.push({ word, reason: `${error}` });
                 }
             })
-        );
-
-        const wordsDefinitionResponse = results.reduce(
-            (response, requestResult) => {
-                if (requestResult.ok && requestResult.isNewDefinition) {
-                    response.savedWordsAmount++;
-                }
-                if (requestResult.ok && !requestResult.isNewDefinition) {
-                    response.existingWordsAmount++;
-                    response.existingWords.push(requestResult.word);
-                }
-                if (!requestResult.ok) {
-                    response.notSavedWordsAmount++;
-                    response.notSavedWords.push({ word: requestResult.word, reason: requestResult.error });
-                }
-
-                return response;
-            },
-            {
-                savedWordsAmount: 0,
-                existingWordsAmount: 0,
-                notSavedWordsAmount: 0,
-                existingWords: [],
-                notSavedWords: []
-            }
         );
 
         return wordsDefinitionResponse;
