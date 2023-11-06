@@ -1,23 +1,23 @@
 import { Body, Controller, Delete, Param, Post, Put, Get } from '@nestjs/common';
-import { CreateUserDTO, LoginDTO } from './dto/user.dto';
+import { UserDTO, Login } from './dto/user.dto';
 import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService) {}
     @Post('createUser')
-    async createUser(@Body() createUserDto: CreateUserDTO): Promise<CreateUserDTO> {
-        return this.userService.createUser({ ...createUserDto });
+    async createUser(@Body() UserDTO: UserDTO): Promise<UserDTO> {
+        return this.userService.createUser({ ...UserDTO });
     }
 
     @Get(':id')
-    async getUserById(@Param('id') userId: string): Promise<CreateUserDTO> {
+    async getUserById(@Param('id') userId: string): Promise<UserDTO> {
         return this.userService.getUserById(userId);
     }
 
     @Post('login')
-    async login(@Body() loginDto: LoginDTO): Promise<string> {
-        return 'Login';
+    async login(@Body() loginData: Login): Promise<UserDTO> {
+        return this.userService.login(loginData);
     }
 
     @Delete(':id')
