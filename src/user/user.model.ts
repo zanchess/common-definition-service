@@ -4,7 +4,7 @@ import { UserWord } from '../userWord/userWord.model';
 
 export type UserDocument = HydratedDocument<User>;
 
-@Schema()
+@Schema({ versionKey: false })
 export class User {
     @Prop({ required: true })
     firstName: string;

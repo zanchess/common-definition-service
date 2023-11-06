@@ -1,9 +1,9 @@
-export class LoginDTO {
-    login: string;
+export class Login {
+    email: string;
     password: string;
 }
 
-export class CreateUserDTO {
+export class UserDTO {
     firstName: string;
     lastName: string;
     account: string;
