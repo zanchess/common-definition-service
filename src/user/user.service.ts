@@ -27,7 +27,7 @@ export class UserService {
         return newUser.save();
     }
 
-    async login({ email, password }: Login): Promise<UserDTO> {
+    async findUser({ email, password }: Login): Promise<UserDTO> {
         const existingUserWithEmail = await this.userModel.findOne({ email }).exec();
         if (!existingUserWithEmail) {
             throw new Error('An account with this email address does not exists.');
@@ -38,7 +38,6 @@ export class UserService {
             throw new Error('Password is incorrect');
         }
 
-        // TODO: remove password from response
         return existingUserWithEmail;
     }
 

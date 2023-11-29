@@ -17,7 +17,7 @@ export class UserController {
 
     @Post('login')
     async login(@Body() loginData: Login): Promise<UserDTO> {
-        return this.userService.login(loginData);
+        return this.userService.findUser(loginData);
     }
 
     @Delete(':id')
