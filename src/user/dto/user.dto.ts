@@ -4,6 +4,7 @@ export class Login {
 }
 
 export class UserDTO {
+    _id?: unknown; // TODO: figure out with id type
     firstName: string;
     lastName: string;
     account: string;
