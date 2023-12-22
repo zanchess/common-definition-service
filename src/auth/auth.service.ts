@@ -11,7 +11,7 @@ export class AuthService {
         // TODO: remove any type
         const user = await this.usersService.findUser({ email, password });
 
-        const payload = { sub: user._id.valueOf(), account: user.account };
+        const payload = { account: user.account };
 
         return {
             access_token: await this.jwtService.signAsync(payload, { secret: 'secret' })
